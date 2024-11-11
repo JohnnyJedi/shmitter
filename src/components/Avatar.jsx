@@ -1,7 +1,10 @@
-const Avatar = ({size,user}) => {
+const Avatar = ({size,user,handleUrl}) => {
+
+const avatarUrl =  () => prompt("Enter your avatar url");
 
     return (
-        <img className={`user-avatar ${size ?? ''}`}
+        <img onClick={() => handleUrl(avatarUrl())} style={{cursor:"pointer"}}
+             className={`user-avatar ${size ?? ''}`}
              src={user.avatar}
              alt={user.name}/>
 

@@ -1,9 +1,9 @@
 import Stats from "./Stats.jsx";
 
-const Sidebar = ({user,stats}) => {
+const Sidebar = ({user,stats,handleUrl}) => {
     return (
         <div className={'sidebar'}>
-            <Stats user={user} stats={stats} />
+            <Stats handleUrl={handleUrl} user={user} stats={stats} />
         </div>
     );
 };

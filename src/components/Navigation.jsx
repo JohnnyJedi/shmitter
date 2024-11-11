@@ -1,9 +1,9 @@
 import Avatar from "./Avatar.jsx";
 
-const Navigation = ({user}) => {
+const Navigation = ({user,handleUrl}) => {
     return (
         <div className="nav">
-            <Avatar user={user} size={'small'}/>
+            <Avatar handleUrl={handleUrl} user={user} size={'small'}/>
         </div>
     );
 };

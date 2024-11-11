@@ -1,11 +1,13 @@
 import Avatar from "./Avatar.jsx";
 
-const Stats = ({user,stats}) => {
+const Stats = ({user,stats,handleUrl}) => {
+
+
     return (
         <div className={'user-stats'}>
 
             <div>
-                <Avatar user={user} alt={user}/>
+                <Avatar handleUrl={handleUrl} user={user} alt={user}/>
                 {user.name}
             </div>
 
