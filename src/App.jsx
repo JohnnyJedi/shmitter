@@ -19,20 +19,36 @@ const App = () => {
     });
 
     const handleUrl = (url) => {
-        if (!url) {
-            setUser(user)
-        } else {
-            setUser((prevState) => ({
+        setUser((prevState) => ({
+            ...prevState,
+            avatar: url || user.avatar
+        }))
+    }
+    const handleName = (name) => {
+        setUser((prevState) => ({
+            ...prevState,
+            name: name || user.name
+        }))
+    }
+
+    const handleFollowers = (n) => {
+        setStats((prevState) => ({
+            ...prevState,
+            followers: (prevState.followers + n >= 0 ? prevState.followers + n : prevState.followers)
+        }))
+    }
+
+    const handleFollowing = (n) => {
+            setStats((prevState) => ({
                 ...prevState,
-                avatar: url,
+                following: (prevState.following + n >= 0 ? prevState.following + n : prevState.following)
             }))
-        }
     }
 
     return (
         <div className={'app'}>
             <TwitterContext.Provider value={{
-                user, stats, handleUrl    //user:user , stats:stats
+                user, stats, handleUrl, handleName, handleFollowers, handleFollowing  //user:user , stats:stats
             }}>
                 <Navigation/>
                 <Body/>

@@ -3,21 +3,42 @@ import {useContext} from "react";
 import {TwitterContext} from "../utils/context.js";
 
 const Stats = () => {
-    const {user,stats,handleUrl} = useContext(TwitterContext);
+    const {user, stats, handleFollowers, handleFollowing} = useContext(TwitterContext);
+
+    const eventFollowing = (e) => {
+        switch (e.button) {
+            case 0:
+                return handleFollowing(1);
+            case 2:
+                // e.preventDefault();
+                return handleFollowing(-1);
+        }
+    }
+
+    const eventFollowers = (e) => {
+        switch (e.button) {
+            case 0:
+                return handleFollowers(1);
+            case 2:
+                // e.preventDefault();
+                return handleFollowers(-1);
+        }
+    }
+
 
     return (
         <div className={'user-stats'}>
 
             <div>
-                <Avatar handleUrl={handleUrl}/>
+                <Avatar/>
                 {user.name}
             </div>
 
             <div className={'stats'}>
-                <div>
-                   Followers : {stats.followers}
+                <div style={{cursor: 'cell'}} onContextMenu={(e) => e.preventDefault()} onMouseDown={eventFollowers}>
+                    Followers : {stats.followers}
                 </div>
-                <div>
+                <div style={{cursor: 'cell'}} onContextMenu={(e) => e.preventDefault()} onMouseDown={eventFollowing}>
                     Following : {stats.following}
                 </div>
             </div>
