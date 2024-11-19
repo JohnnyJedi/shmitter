@@ -12,7 +12,6 @@ const Avatar = ({size}) => {
             case 0:
                 return handleUrl(avatarUrl());
             case 2:
-                e.preventDefault();
                 return handleName(avatarName());
         }
     }
@@ -20,6 +19,7 @@ const Avatar = ({size}) => {
 
     return (
         <img onMouseDown={eventMouse}
+             onContextMenu={(e) => e.preventDefault()}
              style={{cursor: 'pointer'}}
              className={`user-avatar ${size ?? ''}`}
              src={user.avatar}
