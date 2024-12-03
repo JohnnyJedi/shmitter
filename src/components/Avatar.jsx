@@ -24,7 +24,7 @@ const Avatar = ({size}) => {
         switch (e.button) {
             case 0:
                 { const url = avatarUrl()
-                return(isValidUrl(url) ? dispatch(changeAvatar(url)): dispatch(changeName())) }
+                return(isValidUrl(url) ? dispatch(changeAvatar(url)): dispatch(changeAvatar())) }
             case 2:
                 { const name = avatarName()
                 return dispatch(changeName(name)); }
