@@ -1,29 +1,28 @@
 import Avatar from "./Avatar.jsx";
-import {useContext} from "react";
-import {TwitterContext} from "../utils/context.js";
+import {useDispatch, useSelector} from "react-redux";
+import {changeStats} from "../actions/userAction.js";
 
 const Stats = () => {
-    const {user, stats, handleFollowers, handleFollowing} = useContext(TwitterContext);
 
-    const eventFollowing = (e) => {
+
+    const dispatch = useDispatch();
+
+    const {name} = useSelector(state => state.user);
+    const{following,followers} = useSelector(state => state.stats);
+
+
+
+    const eventStats = (e) => {
+        const field = e.currentTarget.getAttribute("data-field");
         switch (e.button) {
             case 0:
-                return handleFollowing(1);
+                return dispatch(changeStats(field,1));
             case 2:
-                // e.preventDefault();
-                return handleFollowing(-1);
+                return dispatch(changeStats(field,-1));
         }
     }
 
-    const eventFollowers = (e) => {
-        switch (e.button) {
-            case 0:
-                return handleFollowers(1);
-            case 2:
-                // e.preventDefault();
-                return handleFollowers(-1);
-        }
-    }
+
 
 
     return (
@@ -31,15 +30,15 @@ const Stats = () => {
 
             <div>
                 <Avatar/>
-                {user.name}
+                {name}
             </div>
 
             <div className={'stats'}>
-                <div style={{cursor: 'cell'}} onContextMenu={(e) => e.preventDefault()} onMouseDown={eventFollowers}>
-                    Followers : {stats.followers}
+                <div style={{cursor: 'cell'}}  data-field={'CHANGE_FOLLOWERS'} onContextMenu={(e) => e.preventDefault()} onMouseDown={eventStats}>
+                    Followers : {followers}
                 </div>
-                <div style={{cursor: 'cell'}} onContextMenu={(e) => e.preventDefault()} onMouseDown={eventFollowing}>
-                    Following : {stats.following}
+                <div style={{cursor: 'cell'}} data-field={'CHANGE_FOLLOWING'} onContextMenu={(e) => e.preventDefault()} onMouseDown={eventStats}>
+                    Following : {following}
                 </div>
             </div>
 
