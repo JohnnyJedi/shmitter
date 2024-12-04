@@ -1,29 +1,33 @@
 import Avatar from "./Avatar.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import {changeStats} from "../actions/userAction.js";
+import {changeFollowers, changeFollowing} from "../actions/userAction.js";
 
 const Stats = () => {
-
 
     const dispatch = useDispatch();
 
     const {name} = useSelector(state => state.user);
-    const{following,followers} = useSelector(state => state.stats);
+    const {following, followers} = useSelector(state => state.stats);
 
 
 
-    const eventStats = (e) => {
-        const field = e.currentTarget.getAttribute("data-field");
+    const eventFollowers = (e) => {
         switch (e.button) {
             case 0:
-                return dispatch(changeStats(field,1));
+                return dispatch(changeFollowers(1));
             case 2:
-                return dispatch(changeStats(field,-1));
+                return dispatch(changeFollowers(-1));
         }
     }
 
-
-
+    const eventFollowing = (e) => {
+        switch (e.button) {
+            case 0:
+                return dispatch(changeFollowing(1));
+            case 2:
+                return dispatch(changeFollowing(-1));
+        }
+    }
 
     return (
         <div className={'user-stats'}>
@@ -34,10 +38,12 @@ const Stats = () => {
             </div>
 
             <div className={'stats'}>
-                <div style={{cursor: 'cell'}}  data-field={'CHANGE_FOLLOWERS'} onContextMenu={(e) => e.preventDefault()} onMouseDown={eventStats}>
+                <div style={{cursor: 'cell'}} data-field={'CHANGE_FOLLOWERS'} onContextMenu={(e) => e.preventDefault()}
+                     onMouseDown={eventFollowers}>
                     Followers : {followers}
                 </div>
-                <div style={{cursor: 'cell'}} data-field={'CHANGE_FOLLOWING'} onContextMenu={(e) => e.preventDefault()} onMouseDown={eventStats}>
+                <div style={{cursor: 'cell'}} data-field={'CHANGE_FOLLOWING'} onContextMenu={(e) => e.preventDefault()}
+                     onMouseDown={eventFollowing}>
                     Following : {following}
                 </div>
             </div>

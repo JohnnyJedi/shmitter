@@ -14,8 +14,14 @@ export const changeName = (name) => ({
     payload: name
 })
 
-export const changeStats = (field, number) => ({
-    type: field,
+
+export const changeFollowers = (number) => ({
+    type: CHANGE_FOLLOWERS,
+    payload: number
+})
+
+export const changeFollowing = (number) => ({
+    type: CHANGE_FOLLOWING,
     payload: number
 })
 
